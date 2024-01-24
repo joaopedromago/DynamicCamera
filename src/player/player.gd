@@ -18,8 +18,8 @@ var status_service: StatusService
 func _ready():
 	status_service = StatusService.new(self)
 	animation_service = AnimationService.new(self, animation_player)
+	movement_service = MovementService.new(self, status_service, twist_pivot, pitch_pivot)
 	camera_service = CameraService.new(self, twist_pivot, pitch_pivot)
-	movement_service = MovementService.new(self, status_service)
 
 
 func _physics_process(delta):
