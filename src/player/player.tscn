@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgxq6eoi6xe5o"]
+
+[ext_resource type="PackedScene" uid="uid://cy6vv7byaw1ub" path="res://imports/player.gltf" id="1_ey0mb"]
+[ext_resource type="Script" path="res://src/player/player.gd" id="1_o6pad"]
+[ext_resource type="Script" path="res://src/player/AntiCollider.gd" id="2_fugk0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1rxue"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_o6pad")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1rxue")
+
+[node name="Mesh" parent="." instance=ExtResource("1_ey0mb")]
+transform = Transform3D(0.011, 0, 0, 0, 0.011, 0, 0, 0, 0.011, 0, 1, 0)
+
+[node name="TwistPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="PitchPivot" type="Node3D" parent="TwistPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0)
+
+[node name="AntiCollider" type="SpringArm3D" parent="TwistPivot/PitchPivot"]
+spring_length = 2.0
+script = ExtResource("2_fugk0")
+
+[node name="Camera" type="Camera3D" parent="TwistPivot/PitchPivot/AntiCollider"]
