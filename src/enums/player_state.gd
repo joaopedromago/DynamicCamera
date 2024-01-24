@@ -1,0 +1,1 @@
+enum { Idle, Walking, Jumping }
