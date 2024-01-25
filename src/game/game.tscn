@@ -102,7 +102,7 @@ data = PackedVector3Array(25, 0, 0.25, -25, 0, 0.25, 25, 0, -0.25, -25, 0, 0.25,
 size = Vector3(50, 20, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_056mi"]
-size = Vector3(50, 20, 1)
+size = Vector3(48, 20, 1)
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_vjvrc")
@@ -254,7 +254,7 @@ shape = SubResource("BoxShape3D_wd7hj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/SideScrolling"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275146, 10, 0)
 shape = SubResource("BoxShape3D_056mi")
 
 [node name="Isometric" type="Area3D" parent="Areas"]
@@ -263,3 +263,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, -35, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/Isometric"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 shape = SubResource("BoxShape3D_wd7hj")
+
+[connection signal="body_entered" from="Areas/ThirdPerson" to="." method="_on_third_person_body_entered"]
+[connection signal="body_entered" from="Areas/SideScrolling" to="." method="_on_side_scrolling_body_entered"]
+[connection signal="body_entered" from="Areas/Isometric" to="." method="_on_isometric_body_entered"]

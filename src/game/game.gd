@@ -25,3 +25,18 @@ func _process(delta):
 		PlayerState.Jumping:
 			playerStateLabel.text = "Jumping"
 	fps_info.text = str(Engine.get_frames_per_second()) + " fps"
+
+
+func _on_side_scrolling_body_entered(body):
+	if body.name == "Player":
+		player.set_camera_side_scrolling()
+
+
+func _on_third_person_body_entered(body):
+	if body.name == "Player":
+		player.set_camera_third_person()
+
+
+func _on_isometric_body_entered(body):
+	if body.name == "Player":
+		player.set_camera_isometric()

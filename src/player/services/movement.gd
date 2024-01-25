@@ -65,6 +65,8 @@ func _face_direction(direction: Vector3):
 
 	if player.action_direction.y > 0:
 		player_body.rotation.y = atan2(direction_x, direction_z) + player.action_direction.y
+	elif player.action_direction.y == 0:
+		player_body.rotation.y = atan2(direction.x * -1, direction.z * -1)
 	else:
 		var normalized_direction = player.action_direction.y - deg_to_rad(180)
 		player_body.rotation.y = atan2(direction_x, direction_z) + normalized_direction
