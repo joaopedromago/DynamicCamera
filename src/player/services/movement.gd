@@ -10,6 +10,7 @@ var twist_pivot: Node3D
 var pitch_pivot: Node3D
 var player_body: CollisionShape3D
 
+
 func _init(
 	player_arg: CharacterBody3D,
 	player_body_arg: CollisionShape3D,
@@ -29,11 +30,12 @@ func process(delta: float):
 	_perform_jump()
 	_perform_movement()
 
+
 func _change_direction():
-	if !player.is_camera_locked():
-		var rotation_y = twist_pivot.rotation.y
-		player.action_direction = Vector3(player.rotation.x, rotation_y, player.rotation.z)
-		
+	var rotation_y = twist_pivot.rotation.y
+	player.action_direction = Vector3(player.rotation.x, rotation_y, player.rotation.z)
+
+
 func _perform_jump():
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		player.velocity.y = Application.JUMP_VELOCITY
@@ -49,22 +51,20 @@ func _perform_movement():
 		var velocity_x = input_direction.x * Application.SPEED
 		var velocity_z = input_direction.z * Application.SPEED
 		var move_direction = twist_pivot.global_transform.basis
-		
-		player.velocity = (
-		move_direction * Vector3(velocity_x, player.velocity.y, velocity_z)
-	)
+
+		player.velocity = (move_direction * Vector3(velocity_x, player.velocity.y, velocity_z))
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, Application.SPEED)
 		player.velocity.z = move_toward(player.velocity.z, 0, Application.SPEED)
 		status_service.set_idle_state()
 
+
 func _face_direction(direction: Vector3):
 	var direction_x = direction.x * player.action_direction.y * -1
 	var direction_z = direction.z * player.action_direction.y * -1
-	
+
 	if player.action_direction.y > 0:
 		player_body.rotation.y = atan2(direction_x, direction_z) + player.action_direction.y
 	else:
 		var normalized_direction = player.action_direction.y - deg_to_rad(180)
 		player_body.rotation.y = atan2(direction_x, direction_z) + normalized_direction
-	

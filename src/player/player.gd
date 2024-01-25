@@ -22,12 +22,14 @@ var state := PlayerState.Idle
 var camera_state := CameraState.ThirdPerson
 var action_direction: Vector3
 
-func _ready():	
+
+func _ready():
 	action_direction = rotation
 	status_service = StatusService.new(self)
 	animation_service = AnimationService.new(self, animation_player)
 	movement_service = MovementService.new(self, body, status_service, twist_pivot, pitch_pivot)
 	camera_service = CameraService.new(self, twist_pivot, pitch_pivot)
+
 
 func _physics_process(delta):
 	_handle_gravity(delta)
@@ -36,14 +38,12 @@ func _physics_process(delta):
 	animation_service.process(delta)
 	move_and_slide()
 
+
 func _handle_gravity(delta):
 	if not is_on_floor():
 		velocity.y -= Application.gravity * delta
-	
+
 
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		camera_service.handle_camera_input(event)
-
-func is_camera_locked():
-	return camera_state != CameraState.ThirdPerson

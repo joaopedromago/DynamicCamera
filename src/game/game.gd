@@ -5,10 +5,14 @@ const PlayerState = preload("res://src/enums/player_state.gd")
 @onready var player := $Player
 @onready var playerStateLabel := $Control/PlayerState
 @onready var fps_info := $Control/FpsInfo
+@onready var fake_wall := $Objects/Walls/FakeWall
+@onready var player_anti_collider := $Player/TwistPivot/PitchPivot/AntiCollider
 
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	player_anti_collider.add_excluded_object(fake_wall.get_rid())
 
 
 func _process(delta):

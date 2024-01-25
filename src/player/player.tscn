@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgxq6eoi6xe5o"]
+[gd_scene load_steps=5 format=3 uid="uid://cgxq6eoi6xe5o"]
 
 [ext_resource type="PackedScene" uid="uid://cy6vv7byaw1ub" path="res://imports/player.gltf" id="1_ey0mb"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_o6pad"]
 [ext_resource type="Script" path="res://src/player/anti_collider.gd" id="3_m4br7"]
-[ext_resource type="Script" path="res://src/player/camera.gd" id="4_iju4u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1rxue"]
 
@@ -28,4 +27,3 @@ spring_length = 3.0
 script = ExtResource("3_m4br7")
 
 [node name="Camera" type="Camera3D" parent="TwistPivot/PitchPivot/AntiCollider"]
-script = ExtResource("4_iju4u")
