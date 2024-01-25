@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bm4gfncj2idxc"]
+[gd_scene load_steps=45 format=3 uid="uid://bm4gfncj2idxc"]
 
 [ext_resource type="PackedScene" uid="uid://cgxq6eoi6xe5o" path="res://src/player/player.tscn" id="1_alrbc"]
 [ext_resource type="Script" path="res://src/game/game.gd" id="1_vjvrc"]
@@ -8,14 +8,47 @@
 [ext_resource type="Texture2D" uid="uid://b4dbm21lngmeq" path="res://imports/textures/Ground067_1K-JPG/Ground067_1K-JPG_NormalGL.jpg" id="3_lrn7c"]
 [ext_resource type="Texture2D" uid="uid://curgr74w67swt" path="res://imports/textures/Terrain_05-512x512.png" id="3_lwpto"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uk8rc"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wt8fd"]
+sky_top_color = Color(0.470588, 0.588235, 1, 1)
+sky_horizon_color = Color(0.647059, 0.654902, 0.670588, 1)
+ground_bottom_color = Color(0, 0, 0.392157, 1)
+ground_horizon_color = Color(0.478431, 0.643137, 1, 1)
 
-[sub_resource type="Sky" id="Sky_woth7"]
-sky_material = SubResource("ProceduralSkyMaterial_uk8rc")
+[sub_resource type="Sky" id="Sky_ffhel"]
+sky_material = SubResource("ProceduralSkyMaterial_wt8fd")
 
 [sub_resource type="Environment" id="Environment_dom65"]
 background_mode = 2
-sky = SubResource("Sky_woth7")
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_ffhel")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.01
+tonemap_exposure = 0.4
+ssao_enabled = true
+ssao_radius = 1.5
+ssao_intensity = 10.0
+ssao_detail = 1.0
+ssao_horizon = 0.21
+ssil_enabled = true
+ssil_radius = 2.47
+sdfgi_enabled = true
+sdfgi_min_cell_size = 9.76563e-05
+sdfgi_energy = 0.1
+glow_enabled = true
+glow_normalized = true
+glow_blend_mode = 1
+fog_enabled = true
+fog_light_color = Color(0.505882, 0.34902, 0.294118, 1)
+fog_light_energy = 0.5
+fog_sky_affect = 0.01
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.188235, 0.188235, 0.188235, 1)
+volumetric_fog_anisotropy = -0.61
+volumetric_fog_length = 15.0
+volumetric_fog_ambient_inject = 0.06
+volumetric_fog_sky_affect = 0.1
+adjustment_contrast = 0.41
+adjustment_saturation = 0.66
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qw2r"]
 albedo_color = Color(0, 0, 0, 1)
@@ -79,6 +112,25 @@ albedo_texture = ExtResource("2_d7ucc")
 [sub_resource type="BoxMesh" id="BoxMesh_mga4g"]
 material = SubResource("StandardMaterial3D_21rd4")
 size = Vector3(50, 1, 50)
+
+[sub_resource type="PrismMesh" id="PrismMesh_uh7sl"]
+size = Vector3(5, 5, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dnntq"]
+data = PackedVector3Array(0, 2.5, 0.5, 2.5, -2.5, 0.5, -2.5, -2.5, 0.5, 0, 2.5, -0.5, -2.5, -2.5, -0.5, 2.5, -2.5, -0.5, 0, 2.5, 0.5, 0, 2.5, -0.5, 2.5, -2.5, 0.5, 0, 2.5, -0.5, 2.5, -2.5, -0.5, 2.5, -2.5, 0.5, 0, 2.5, -0.5, 0, 2.5, 0.5, -2.5, -2.5, -0.5, 0, 2.5, 0.5, -2.5, -2.5, 0.5, -2.5, -2.5, -0.5, -2.5, -2.5, 0.5, 2.5, -2.5, 0.5, -2.5, -2.5, -0.5, 2.5, -2.5, 0.5, 2.5, -2.5, -0.5, -2.5, -2.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awmf6"]
+albedo_texture = ExtResource("3_lwpto")
+
+[sub_resource type="BoxMesh" id="BoxMesh_dneqs"]
+material = SubResource("StandardMaterial3D_awmf6")
+size = Vector3(5, 5, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_uahb0"]
+data = PackedVector3Array(-2.5, 2.5, 25, 2.5, 2.5, 25, -2.5, -2.5, 25, 2.5, 2.5, 25, 2.5, -2.5, 25, -2.5, -2.5, 25, 2.5, 2.5, -25, -2.5, 2.5, -25, 2.5, -2.5, -25, -2.5, 2.5, -25, -2.5, -2.5, -25, 2.5, -2.5, -25, 2.5, 2.5, 25, 2.5, 2.5, -25, 2.5, -2.5, 25, 2.5, 2.5, -25, 2.5, -2.5, -25, 2.5, -2.5, 25, -2.5, 2.5, -25, -2.5, 2.5, 25, -2.5, -2.5, -25, -2.5, 2.5, 25, -2.5, -2.5, 25, -2.5, -2.5, -25, 2.5, 2.5, 25, -2.5, 2.5, 25, 2.5, 2.5, -25, -2.5, 2.5, 25, -2.5, 2.5, -25, 2.5, 2.5, -25, -2.5, -2.5, 25, 2.5, -2.5, 25, -2.5, -2.5, -25, 2.5, -2.5, 25, 2.5, -2.5, -25, -2.5, -2.5, -25)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gdpup"]
+data = PackedVector3Array(-2.5, 2.5, 25, 2.5, 2.5, 25, -2.5, -2.5, 25, 2.5, 2.5, 25, 2.5, -2.5, 25, -2.5, -2.5, 25, 2.5, 2.5, -25, -2.5, 2.5, -25, 2.5, -2.5, -25, -2.5, 2.5, -25, -2.5, -2.5, -25, 2.5, -2.5, -25, 2.5, 2.5, 25, 2.5, 2.5, -25, 2.5, -2.5, 25, 2.5, 2.5, -25, 2.5, -2.5, -25, 2.5, -2.5, 25, -2.5, 2.5, -25, -2.5, 2.5, 25, -2.5, -2.5, -25, -2.5, 2.5, 25, -2.5, -2.5, 25, -2.5, -2.5, -25, 2.5, 2.5, 25, -2.5, 2.5, 25, 2.5, 2.5, -25, -2.5, 2.5, 25, -2.5, 2.5, -25, 2.5, 2.5, -25, -2.5, -2.5, 25, 2.5, -2.5, 25, -2.5, -2.5, -25, 2.5, -2.5, 25, 2.5, -2.5, -25, -2.5, -2.5, -25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x84qd"]
 albedo_texture = ExtResource("2_d7ucc")
@@ -145,8 +197,8 @@ offset_bottom = 32.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dom65")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.0550221, -0.729522, 0.68174, 0.108298, 0.674386, 0.730394, -0.992595, 0.114019, 0.0418999, 67.8239, 47.7171, -5.16812)
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0550221, -0.729522, 0.68174, 0.108298, 0.674386, 0.730394, -0.992595, 0.114019, 0.0418996, 159.133, 153.953, -5.16812)
 light_energy = 2.0
 shadow_enabled = true
 
@@ -154,13 +206,13 @@ shadow_enabled = true
 
 [node name="Objects" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects"]
+[node name="Polygon" type="MeshInstance3D" parent="Objects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -14.716)
 mesh = SubResource("BoxMesh_ay5oq")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Objects/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Objects/Polygon"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Polygon/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_txwmo")
 
 [node name="Walls" type="Node3D" parent="Objects"]
@@ -278,6 +330,42 @@ skeleton = NodePath("../..")
 [node name="UndergroundRoof" type="MeshInstance3D" parent="Objects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -25, 0)
 mesh = SubResource("BoxMesh_mga4g")
+
+[node name="Polygon2" type="MeshInstance3D" parent="Objects"]
+transform = Transform3D(-0.0824603, 0, 0.996594, 0, 1, 0, -0.996594, 0, -0.0824603, 0, 2.42017, 18.3169)
+mesh = SubResource("PrismMesh_uh7sl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Objects/Polygon2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Polygon2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_dnntq")
+
+[node name="Polygon3" type="MeshInstance3D" parent="Objects"]
+transform = Transform3D(-0.421942, -0.356076, 0.833772, 0.533727, 0.645841, 0.545917, -0.732872, 0.675351, -0.0824603, -16.5079, 11.7782, 3.88572)
+mesh = SubResource("BoxMesh_dneqs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Objects/Polygon3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Polygon3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_uahb0")
+
+[node name="Polygon4" type="MeshInstance3D" parent="Objects"]
+transform = Transform3D(0.539062, 0.240397, -0.80723, 0.532, 0.645841, 0.5476, 0.652984, -0.724637, 0.220257, 32.0992, 4.74104, -7.87214)
+mesh = SubResource("BoxMesh_dneqs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Objects/Polygon4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Polygon4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_gdpup")
+
+[node name="Polygon5" type="MeshInstance3D" parent="Objects"]
+transform = Transform3D(0.999104, -0.0355058, 0.0230305, 0.0131977, 0.778441, 0.627579, -0.0402106, -0.626713, 0.778212, 14.6504, 5.76705, 21.9474)
+mesh = SubResource("BoxMesh_dneqs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Objects/Polygon5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Polygon5/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_gdpup")
 
 [node name="Grounds" type="Node3D" parent="."]
 

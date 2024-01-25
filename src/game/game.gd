@@ -7,13 +7,13 @@ const PlayerState = preload("res://src/enums/player_state.gd")
 @onready var fps_info := $Control/FpsInfo
 @onready var fake_wall := $Objects/Walls/FakeWall
 @onready var player_anti_collider := $Player/TwistPivot/PitchPivot/AntiCollider
+@onready var sun := $Sun
 
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	player_anti_collider.add_excluded_object(fake_wall.get_rid())
-
 
 func _process(delta):
 	var state = player.state
@@ -25,7 +25,12 @@ func _process(delta):
 		PlayerState.Jumping:
 			playerStateLabel.text = "Jumping"
 	fps_info.text = str(Engine.get_frames_per_second()) + " fps"
+	sun_movement()
 
+
+func sun_movement():
+	# rotate sun
+	sun.rotate_x(deg_to_rad(0.1))
 
 func _on_side_scrolling_body_entered(body):
 	if body.name == "Player":
