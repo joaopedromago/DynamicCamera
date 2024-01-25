@@ -54,16 +54,12 @@ func is_camera_movement_blocked():
 	
 func set_camera_side_scrolling():
 	camera_state = CameraState.SideScrolling
-	camera_service.set_side_scrolling_config()
 	
 func set_camera_isometric():
 	camera_state = CameraState.Isometric
-	camera_service.set_isometric_config()
 	
 func set_camera_third_person():
 	camera_state = CameraState.ThirdPerson
-	camera_service.set_third_person_config()
 	
 func set_camera_first_person():
 	camera_state = CameraState.FirstPerson
-	camera_service.set_first_person_config()
