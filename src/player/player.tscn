@@ -9,15 +9,13 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_o6pad")
-metadata/state = 0
-metadata/is_camera_locked = false
 
-[node name="Mesh" parent="." instance=ExtResource("1_ey0mb")]
-transform = Transform3D(-0.011, 0, -9.61651e-10, 0, 0.011, 0, 9.61651e-10, 0, -0.011, 0, 1, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_1rxue")
+
+[node name="Mesh" parent="Body" instance=ExtResource("1_ey0mb")]
+transform = Transform3D(-0.011, 0, -9.61651e-10, 0, 0.011, 0, 9.61651e-10, 0, -0.011, 0, 0, 0)
 
 [node name="TwistPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -26,7 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0)
 
 [node name="AntiCollider" type="SpringArm3D" parent="TwistPivot/PitchPivot"]
-spring_length = 2.0
+spring_length = 3.0
 script = ExtResource("3_m4br7")
 
 [node name="Camera" type="Camera3D" parent="TwistPivot/PitchPivot/AntiCollider"]

@@ -2,6 +2,8 @@ extends Node
 
 class_name CameraService
 
+const PlayerState = preload("res://src/enums/player_state.gd")
+
 var player: CharacterBody3D
 var twist_pivot: Node3D
 var pitch_pivot: Node3D

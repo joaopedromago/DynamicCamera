@@ -32,6 +32,6 @@ func _animate():
 			animation_player.play("Run_forward")
 
 func _verify_state_changes():
-	if player_state != player.get_meta("state"):
-		player_state = player.get_meta("state")
+	if player_state != player.state:
+		player_state = player.state
 		animation_played = false

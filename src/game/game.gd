@@ -6,11 +6,13 @@ const PlayerState = preload("res://src/enums/player_state.gd")
 @onready var playerStateLabel := $Control/PlayerState
 @onready var fps_info := $Control/FpsInfo
 
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
 func _process(delta):
-	var state = player.get_meta("state")
+	var state = player.state
 	match state:
 		PlayerState.Idle:
 			playerStateLabel.text = "Idle"

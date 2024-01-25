@@ -11,7 +11,7 @@ func _init(player_arg: CharacterBody3D):
 	player = player_arg
 
 
-func set_moving_state():
+func set_moving_state(direction: Vector3):
 	if !player.is_on_floor():
 		_change_state(PlayerState.Jumping)
 	else:
@@ -26,5 +26,5 @@ func set_idle_state():
 
 
 func _change_state(new_state: int):
-	if new_state != player.get_meta("state"):
-		player.set_meta("state", new_state)
+	if new_state != player.state:
+		player.state = new_state

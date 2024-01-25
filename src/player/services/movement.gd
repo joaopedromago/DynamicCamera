@@ -2,51 +2,69 @@ extends Node
 
 class_name MovementService
 
+const PlayerState = preload("res://src/enums/player_state.gd")
+
 var player: CharacterBody3D
 var status_service: StatusService
 var twist_pivot: Node3D
 var pitch_pivot: Node3D
+var player_body: CollisionShape3D
 
-func _init(player_arg: CharacterBody3D, status_service_arg: StatusService, twist_pivot_arg: Node3D, pitch_pivot_arg: Node3D):
+func _init(
+	player_arg: CharacterBody3D,
+	player_body_arg: CollisionShape3D,
+	status_service_arg: StatusService,
+	twist_pivot_arg: Node3D,
+	pitch_pivot_arg: Node3D
+):
 	player = player_arg
+	player_body = player_body_arg
 	status_service = status_service_arg
 	twist_pivot = twist_pivot_arg
 	pitch_pivot = pitch_pivot_arg
 
 
 func process(delta: float):
+	_change_direction()
 	_perform_jump()
 	_perform_movement()
 
 func _change_direction():
-	if !player.get_meta("is_camera_locked"):
-		var rotation = twist_pivot.rotation.y
-		var distance = twist_pivot.get_child(0).get_child(0).spring_length
+	if !player.is_camera_locked():
+		var rotation_y = twist_pivot.rotation.y
+		player.action_direction = Vector3(player.rotation.x, rotation_y, player.rotation.z)
 		
-		var player_x = player.position.x
-		var player_z = player.position.z
-		
-		var target_x = player_x + distance * cos(rotation)
-		var target_z = player_z + distance * sin(rotation)
-		
-		var position = Vector3( target_x, player.position.y, target_z)
-		#player.look_at(position)
-
 func _perform_jump():
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		player.velocity.y = Application.JUMP_VELOCITY
 
 
 func _perform_movement():
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	if direction:
-		_change_direction()	
-		status_service.set_moving_state()
-		player.velocity.x = direction.x * Application.SPEED
-		player.velocity.z = direction.z * Application.SPEED
+	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var input_direction := Vector3(input_dir.x, 0, input_dir.y)
+
+	if input_direction:
+		_face_direction(input_direction)
+		status_service.set_moving_state(input_direction)
+		var velocity_x = input_direction.x * Application.SPEED
+		var velocity_z = input_direction.z * Application.SPEED
+		var move_direction = twist_pivot.global_transform.basis
+		
+		player.velocity = (
+		move_direction * Vector3(velocity_x, player.velocity.y, velocity_z)
+	)
 	else:
-		status_service.set_idle_state()
 		player.velocity.x = move_toward(player.velocity.x, 0, Application.SPEED)
 		player.velocity.z = move_toward(player.velocity.z, 0, Application.SPEED)
+		status_service.set_idle_state()
+
+func _face_direction(direction: Vector3):
+	var direction_x = direction.x * player.action_direction.y * -1
+	var direction_z = direction.z * player.action_direction.y * -1
+	
+	if player.action_direction.y > 0:
+		player_body.rotation.y = atan2(direction_x, direction_z) + player.action_direction.y
+	else:
+		var normalized_direction = player.action_direction.y - deg_to_rad(180)
+		player_body.rotation.y = atan2(direction_x, direction_z) + normalized_direction
+	
