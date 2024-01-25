@@ -50,6 +50,7 @@ func _update_camera_movement():
 	pitch_input = 0.0
 
 func reset_camera_config():
+	camera_anti_collider.position = Vector3(0, 0, 0)
 	camera_anti_collider.spring_length = Application.DEFAULT_CAMERA_DISTANCE
 	twist_pivot.rotation = Vector3(0, 0, 0)
 	pitch_pivot.rotation = Vector3(0, 0, 0)
@@ -73,5 +74,7 @@ func set_isometric_config():
 	
 func set_first_person_config():
 	reset_camera_config()
-	print("set_first_person_config")
+	camera_anti_collider.spring_length = 0
+	camera_anti_collider.position = Vector3(0, 0.5, 0)
+	pitch_pivot.rotate_x(deg_to_rad(-80))
 	

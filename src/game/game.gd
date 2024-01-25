@@ -40,3 +40,8 @@ func _on_third_person_body_entered(body):
 func _on_isometric_body_entered(body):
 	if body.name == "Player":
 		player.set_camera_isometric()
+
+
+func _on_first_person_body_entered(body):
+	if body.name == "Player":
+		player.set_camera_first_person()
