@@ -75,6 +75,7 @@ func set_isometric_config():
 func set_first_person_config():
 	reset_camera_config()
 	camera_anti_collider.spring_length = 0
-	camera_anti_collider.position = Vector3(0, 0.5, 0)
-	pitch_pivot.rotate_x(deg_to_rad(-80))
+	camera_anti_collider.position = Vector3(0, 0.75, 0)
+	pitch_pivot.rotate_x(deg_to_rad(0))
+	twist_pivot.rotate_y(player.action_direction.y)
 	

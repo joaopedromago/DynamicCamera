@@ -3,6 +3,7 @@ extends Node
 class_name MovementService
 
 const PlayerState = preload("res://src/enums/player_state.gd")
+const CameraState = preload("res://src/enums/camera_state.gd")
 
 var player: CharacterBody3D
 var status_service: StatusService
@@ -34,6 +35,8 @@ func process(delta: float):
 func _change_direction():
 	var rotation_y = twist_pivot.rotation.y
 	player.action_direction = Vector3(player.rotation.x, rotation_y, player.rotation.z)
+	if player.camera_state == CameraState.FirstPerson:
+		_face_direction(player.action_direction * -1)
 
 
 func _perform_jump():
@@ -46,7 +49,8 @@ func _perform_movement():
 	var input_direction := Vector3(input_dir.x, 0, input_dir.y)
 
 	if input_direction:
-		_face_direction(input_direction)
+		if player.camera_state != CameraState.FirstPerson:
+			_face_direction(input_direction)
 		status_service.set_moving_state(input_direction)
 		var velocity_x = input_direction.x * Application.SPEED
 		var velocity_z = input_direction.z * Application.SPEED

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bm4gfncj2idxc"]
+[gd_scene load_steps=39 format=3 uid="uid://bm4gfncj2idxc"]
 
 [ext_resource type="PackedScene" uid="uid://cgxq6eoi6xe5o" path="res://src/player/player.tscn" id="1_alrbc"]
 [ext_resource type="Script" path="res://src/game/game.gd" id="1_vjvrc"]
@@ -8,7 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://b4dbm21lngmeq" path="res://imports/textures/Ground067_1K-JPG/Ground067_1K-JPG_NormalGL.jpg" id="3_lrn7c"]
 [ext_resource type="Texture2D" uid="uid://curgr74w67swt" path="res://imports/textures/Terrain_05-512x512.png" id="3_lwpto"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uk8rc"]
+
+[sub_resource type="Sky" id="Sky_woth7"]
+sky_material = SubResource("ProceduralSkyMaterial_uk8rc")
+
 [sub_resource type="Environment" id="Environment_dom65"]
+background_mode = 2
+sky = SubResource("Sky_woth7")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qw2r"]
 albedo_color = Color(0, 0, 0, 1)
@@ -139,10 +146,11 @@ offset_bottom = 32.0
 environment = SubResource("Environment_dom65")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.6298, 47.7171, 0)
+transform = Transform3D(-0.0550221, -0.729522, 0.68174, 0.108298, 0.674386, 0.730394, -0.992595, 0.114019, 0.0418999, 67.8239, 47.7171, -5.16812)
+light_energy = 2.0
+shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_alrbc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -35, 0)
 
 [node name="Objects" type="Node3D" parent="."]
 
